@@ -14,6 +14,7 @@
     "weather"
   ],
   "author": "Samuel Ogboru",
+  "type": "module",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sicktooth/weather-Project/issues"
