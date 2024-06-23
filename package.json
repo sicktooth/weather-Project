@@ -1,0 +1,22 @@
+{
+  "name": "weather-project",
+  "version": "1.0.0",
+  "description": "Get weather updates for free",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sicktooth/weather-Project.git"
+  },
+  "keywords": [
+    "weather"
+  ],
+  "author": "Samuel Ogboru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sicktooth/weather-Project/issues"
+  },
+  "homepage": "https://github.com/sicktooth/weather-Project#readme"
+}
