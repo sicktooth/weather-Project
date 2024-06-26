@@ -16,16 +16,17 @@ app.get("/", (req, res) => {
     response.on("data", (data) => {
       const weatherData = JSON.parse(data)
       const weatherTemp = weatherData.main.temp,
-            weatherDescription = weatherData.weather[0].description;
+            weatherDescription = weatherData.weather[0].description,
+            weatherIcon = weatherData.weather[0].icon,
+            iconUrl = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
-      log(weatherData);
-      log(weatherTemp);
-      log(weatherDescription);
+      res.write(`<p>The weather is currently ${weatherDescription}</p>`);
+      res.write(`<h1>The temperature in Port Harcourt is ${weatherTemp} degrees Celsius</h1>`);
+      res.write(`<img src="${iconUrl}">`);
+      res.send();
     });
     
   });
-
-  res.send("Hello World!");
 });
 
 app.listen(port, () => {
