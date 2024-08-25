@@ -1,31 +1,27 @@
 const express = require("express");
-// import { log } from "node:console";
-// import path from "path";
 const https = require("https");
-// import https from "node:https";
 
 const app = express();
 const port = 4000;
 
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static("public"));
-
-var weather = [];
 
 app.set("view engine", "ejs");
-app.get("/", (req, res) => {
-  // res.sendFile(path.join(__dirname, "public", "index.html"));
 
+let weatherDataStore = {}; // Object to store weather data for different cities
+
+app.get("/", (req, res) => {
+  // Render the homepage without any weather data by default
   res.render("list", { 
-    city: weather[3],
-    temp: weather[1],
-    description: weather[2],
-    weatherIcon: weather[0]
-   });
+    city: null,
+    temp: null,
+    description: null,
+    weatherIcon: null
+  });
 });
 
 app.post("/", (req, res) => {
-  var city = req.body.cityName;
+  const city = req.body.cityName;
   const query = city,
         unit = "metric",
         apiKey = "340e6b918ec7d7dd6fb1b86e6c23bb5c";
@@ -35,26 +31,32 @@ app.post("/", (req, res) => {
     console.log(response.statusCode);
 
     response.on("data", (data) => {
-      const weatherData = JSON.parse(data)
+      const weatherData = JSON.parse(data);
       const weatherTemp = weatherData.main.temp,
             weatherDescription = weatherData.weather[0].description,
             weatherIcon = weatherData.weather[0].icon,
             iconUrl = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
 
-      // res.write(`<p>The weather is currently ${weatherDescription}</p>`);
-      // res.write(`<h1>The temperature in ${query} is ${weatherTemp} degrees Celsius</h1>`);
-      // res.write(`<img src="${iconUrl}">`);
-      // res.send();
-      
-      weather.push(iconUrl, weatherTemp, weatherDescription, query);
-      
-      console.log(weather);
-      res.redirect("/");
+      // Store the weather data in an object with the city name as the key
+      weatherDataStore[city] = {
+        iconUrl,
+        weatherTemp,
+        weatherDescription,
+        city
+      };
+
+      // Redirect to the home page with the weather data for the requested city
+      res.render("list", {
+        city: weatherDataStore[city].city,
+        temp: weatherDataStore[city].weatherTemp,
+        description: weatherDataStore[city].weatherDescription,
+        weatherIcon: weatherDataStore[city].iconUrl
+      });
+      // console.log(weatherDataStore);
     });
-    
   });
 });
 
 app.listen(port, () => {
-  console.log(`weather app server has started at http://localhost:${port}`);
+  console.log(`Weather app server has started at http://localhost:${port}`);
 });
