@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Weather App</title>
-    </head>
-    <body>
-        <form action="/" method="post">
-            <label for="cityInput">City Name: </label>
-            <input type="text" name="cityName" id="cityInput">
-            <button type="submit">Go</button>
-        </form>
-        <div id="weatherContainer">
-            <h2 id="cityName"><%= city %></h2>
-            <p id="temperature"><%= temp  %></p>
-            <p id="description"><%= description %></p>
-            <img id="weatherIcon" alt="Weather icon" src="<%= weatherIcon %>">
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <form action="/" method="POST">
+        <input type="text" name="cityName" placeholder="Enter city name" required>
+        <button type="submit">Get Weather</button>
+    </form>
+    
+    <% if (city) { %>
+        <h2>Weather in <%= city %></h2>
+        <p>Temperature: <%= temp %> °C</p>
+        <p>Description: <%= description %></p>
+        <img src="<%= weatherIcon %>" alt="Weather Icon">
+    <% } else { %>
+        <p>Please enter a city name to get the weather information.</p>
+    <% } %>
+</body>
 </html>
