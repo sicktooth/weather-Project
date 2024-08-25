@@ -14,13 +14,13 @@
     "weather"
   ],
   "author": "Samuel Ogboru",
-  "type": "module",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sicktooth/weather-Project/issues"
   },
   "homepage": "https://github.com/sicktooth/weather-Project#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.19.2"
   }
 }

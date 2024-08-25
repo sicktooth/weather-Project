@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather App</title>
+    </head>
+    <body>
+        <form action="/" method="post">
+            <label for="cityInput">City Name: </label>
+            <input type="text" name="cityName" id="cityInput">
+            <button type="submit">Go</button>
+        </form>
+        <div id="weatherContainer">
+            <h2 id="cityName"><%= city %></h2>
+            <p id="temperature"><%= temp  %></p>
+            <p id="description"><%= description %></p>
+            <img id="weatherIcon" alt="Weather icon" src="<%= weatherIcon %>">
+        </div>
+    </body>
+</html>
